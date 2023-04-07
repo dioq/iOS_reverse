@@ -6,7 +6,7 @@
 # EXPANDED_CODE_SIGN_IDENTITY   当前工程运行时所使用的签名证书
 # PRODUCT_BUNDLE_IDENTIFIER     bundle identifier 是App的唯一标识
 
-# 待调试 app #WeChat.app   TargetObjCHook.app
+# 待调试 app #WeChat.app   TargetForCrack.app TargetObjCHook.app
 TARGET_APP_NAME=TargetForCrack.app
 ## Mach-O可执行文件名
 exe_bin="${TARGET_APP_NAME%%.*}"

@@ -9,7 +9,6 @@
 #define Hook_C_h
 
 #include <stdio.h>
-#include <string.h>
 
 int hook(void);
 
