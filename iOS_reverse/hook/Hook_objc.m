@@ -16,16 +16,20 @@ static NSString *IDFA;
 
 -(void)hook {
     IDFA = @"9ECC3D7C-6FF8-4B15-A3D6-05AEAA644388";
-    Method origin_advertisingIdentifier = class_getInstanceMethod(NSClassFromString(@"ASIdentifierManager"), @selector(advertisingIdentifier));
-    Method new_advertisingIdentifier = class_getInstanceMethod([self class], @selector(advertisingIdentifier));
-    method_exchangeImplementations(origin_advertisingIdentifier, new_advertisingIdentifier);
-    NSLog(@"IDFA was hooked! new value:%@",IDFA);
+    if(IDFA) {
+        Method origin_method = class_getInstanceMethod(NSClassFromString(@"ASIdentifierManager"), @selector(advertisingIdentifier));
+        Method new_method = class_getInstanceMethod([self class], @selector(advertisingIdentifier));
+        method_exchangeImplementations(origin_method, new_method);
+        NSLog(@"IDFA was hooked! new value:%@",IDFA);
+    }
     
     deviceName = @"newName_hook";
-    Method origin_name = class_getInstanceMethod(NSClassFromString(@"UIDevice"), @selector(name));
-    Method new_name = class_getInstanceMethod([self class], @selector(name));
-    method_exchangeImplementations(origin_name, new_name);
-    NSLog(@"deviceName was hooked! new value:%@",deviceName);
+    if(deviceName) {
+        Method origin_method = class_getInstanceMethod(NSClassFromString(@"UIDevice"), @selector(name));
+        Method new_method = class_getInstanceMethod([self class], @selector(name));
+        method_exchangeImplementations(origin_method, new_method);
+        NSLog(@"deviceName was hooked! new value:%@",deviceName);
+    }
 }
 
 // OC 层获取设备名称 调用的方法
