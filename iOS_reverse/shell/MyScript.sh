@@ -8,8 +8,6 @@
 
 # 待调试 app #WeChat.app   TargetForCrack.app TargetObjCHook.app
 TARGET_APP_NAME=TargetForCrack.app
-## Mach-O可执行文件名
-exe_bin="${TARGET_APP_NAME%%.*}"
 
 # 自己编译的动态库,注入到目标应用
 injectdylib=libDarwinKernelCore.dylib
@@ -49,5 +47,7 @@ fi
 if [ -d "${BUILD_APP_PATH}/PlugIns" ]; then
     /usr/bin/codesign --force --sign "${EXPANDED_CODE_SIGN_IDENTITY}" ${BUILD_APP_PATH}/PlugIns/*
 fi
+## Mach-O可执行文件名
+exe_bin=$(/usr/libexec/PlistBuddy -c "Print :CFBundleExecutable" "${BUILD_APP_PATH}/Info.plist")
 # 签名Mach-O可执行文件
 /usr/bin/codesign --force --sign "${EXPANDED_CODE_SIGN_IDENTITY}" ${BUILD_APP_PATH}/${exe_bin}
